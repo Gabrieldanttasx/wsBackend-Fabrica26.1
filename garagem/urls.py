@@ -13,4 +13,6 @@ urlpatterns = [
     path('veiculos/novo/', views.criar_veiculo, name='criar_veiculo'),
     path('veiculos/<int:pk>/editar/', views.editar_veiculo, name='editar_veiculo'),
     path('veiculos/<int:pk>/excluir/', views.excluir_veiculo, name='excluir_veiculo'),
+
+    path('consultar-vin/', views.consultar_vin, name='consultar_vin'),
 ]

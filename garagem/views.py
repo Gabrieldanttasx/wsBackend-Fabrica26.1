@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Garagem, Veiculo
 from .forms import GaragemForm, VeiculoForm
-
+from .services import decodificar_vin
 
 def home(request):
     return render(request, 'garagem/home.html')
@@ -65,3 +65,25 @@ def excluir_veiculo(request, pk):
         veiculo.delete()
         return redirect('listar_veiculos')
     return render(request, 'garagem/veiculos/excluir.html', {'veiculo': veiculo})
+
+
+def consultar_vin(request):
+    resultado = None
+    erro = None
+
+    if request.method == 'POST':
+        vin = request.POST.get('vin', '').strip()
+        ano_modelo = request.POST.get('ano_modelo', '').strip()
+
+        if not vin:
+            erro = 'Digite um VIN.'
+        else:
+            try:
+                resultado = decodificar_vin(vin, ano_modelo)
+            except Exception:
+                erro = 'Não foi possível consultar a API neste momento.'
+
+    return render(request, 'garagem/consulta_vin.html', {
+        'resultado': resultado,
+        'erro': erro
+    })

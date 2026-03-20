@@ -1,0 +1,35 @@
+{% extends 'garagem/base.html' %}
+
+{% block content %}
+<h2>Consultar veículo por VIN</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label>VIN:</label><br>
+        <input type="text" name="vin">
+    </p>
+
+    <p>
+        <label>Ano do modelo (opcional):</label><br>
+        <input type="text" name="ano_modelo">
+    </p>
+
+    <button type="submit">Consultar</button>
+</form>
+
+{% if erro %}
+    <p>{{ erro }}</p>
+{% endif %}
+
+{% if resultado %}
+    <hr>
+    <h3>Resultado</h3>
+    <p><strong>Marca:</strong> {{ resultado.Make }}</p>
+    <p><strong>Modelo:</strong> {{ resultado.Model }}</p>
+    <p><strong>Ano:</strong> {{ resultado.ModelYear }}</p>
+    <p><strong>Fabricante:</strong> {{ resultado.Manufacturer }}</p>
+    <p><strong>Tipo de veículo:</strong> {{ resultado.VehicleType }}</p>
+    <p><strong>VIN consultado:</strong> {{ resultado.VIN }}</p>
+{% endif %}
+{% endblock %}
