@@ -43,14 +43,23 @@ def listar_veiculos(request):
 
 
 def criar_veiculo(request):
-    data = request.GET or None
-    form = VeiculoForm(data or None)
-
     if request.method == 'POST':
         form = VeiculoForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('listar_veiculos')
+    else:
+        # pega dados da URL (GET)
+        initial_data = {
+            'vin': request.GET.get('vin'),
+            'marca': request.GET.get('marca'),
+            'modelo': request.GET.get('modelo'),
+            'ano_modelo': request.GET.get('ano_modelo'),
+            'fabricante': request.GET.get('fabricante'),
+            'tipo_veiculo': request.GET.get('tipo_veiculo'),
+        }
+
+        form = VeiculoForm(initial=initial_data)
 
     return render(request, 'garagem/veiculos/form.html', {
         'form': form,
