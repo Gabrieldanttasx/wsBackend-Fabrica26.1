@@ -8,4 +8,9 @@ urlpatterns = [
     path('garagens/nova/', views.criar_garagem, name='criar_garagem'),
     path('garagens/<int:pk>/editar/', views.editar_garagem, name='editar_garagem'),
     path('garagens/<int:pk>/excluir/', views.excluir_garagem, name='excluir_garagem'),
+
+    path('veiculos/', views.listar_veiculos, name='listar_veiculos'),
+    path('veiculos/novo/', views.criar_veiculo, name='criar_veiculo'),
+    path('veiculos/<int:pk>/editar/', views.editar_veiculo, name='editar_veiculo'),
+    path('veiculos/<int:pk>/excluir/', views.excluir_veiculo, name='excluir_veiculo'),
 ]

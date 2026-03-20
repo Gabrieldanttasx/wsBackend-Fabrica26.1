@@ -1,0 +1,23 @@
+{% extends 'garagem/base.html' %}
+
+{% block content %}
+<h2>Veículos</h2>
+
+<a href="{% url 'criar_veiculo' %}">Novo veículo</a>
+
+<ul>
+    {% for veiculo in veiculos %}
+        <li>
+            <strong>{{ veiculo.marca }} {{ veiculo.modelo }}</strong> - VIN: {{ veiculo.vin }}
+            <br>
+            Garagem: {{ veiculo.garagem.nome }}
+            <br>
+            <a href="{% url 'editar_veiculo' veiculo.id %}">Editar</a>
+            |
+            <a href="{% url 'excluir_veiculo' veiculo.id %}">Excluir</a>
+        </li>
+    {% empty %}
+        <li>Nenhum veículo cadastrado.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

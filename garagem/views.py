@@ -35,3 +35,33 @@ def excluir_garagem(request, pk):
         garagem.delete()
         return redirect('listar_garagens')
     return render(request, 'garagem/garagens/excluir.html', {'garagem': garagem})
+
+
+def listar_veiculos(request):
+    veiculos = Veiculo.objects.select_related('garagem').all().order_by('-criado_em')
+    return render(request, 'garagem/veiculos/listar.html', {'veiculos': veiculos})
+
+
+def criar_veiculo(request):
+    form = VeiculoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('listar_veiculos')
+    return render(request, 'garagem/veiculos/form.html', {'form': form, 'titulo': 'Novo veículo'})
+
+
+def editar_veiculo(request, pk):
+    veiculo = get_object_or_404(Veiculo, pk=pk)
+    form = VeiculoForm(request.POST or None, instance=veiculo)
+    if form.is_valid():
+        form.save()
+        return redirect('listar_veiculos')
+    return render(request, 'garagem/veiculos/form.html', {'form': form, 'titulo': 'Editar veículo'})
+
+
+def excluir_veiculo(request, pk):
+    veiculo = get_object_or_404(Veiculo, pk=pk)
+    if request.method == 'POST':
+        veiculo.delete()
+        return redirect('listar_veiculos')
+    return render(request, 'garagem/veiculos/excluir.html', {'veiculo': veiculo})
