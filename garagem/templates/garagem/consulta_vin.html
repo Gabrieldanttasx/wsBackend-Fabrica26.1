@@ -31,5 +31,12 @@
     <p><strong>Fabricante:</strong> {{ resultado.Manufacturer }}</p>
     <p><strong>Tipo de veículo:</strong> {{ resultado.VehicleType }}</p>
     <p><strong>VIN consultado:</strong> {{ resultado.VIN }}</p>
+
+    <br>
+
+    <a href="{% url 'criar_veiculo' %}?vin={{ resultado.VIN }}&marca={{ resultado.Make }}&modelo={{ resultado.Model }}&ano_modelo={{ resultado.ModelYear }}&fabricante={{ resultado.Manufacturer }}&tipo_veiculo={{ resultado.VehicleType }}">
+        🚗 Cadastrar este veículo
+    </a>
+
 {% endif %}
 {% endblock %}

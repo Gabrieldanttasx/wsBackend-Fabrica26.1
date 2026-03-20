@@ -43,11 +43,19 @@ def listar_veiculos(request):
 
 
 def criar_veiculo(request):
-    form = VeiculoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('listar_veiculos')
-    return render(request, 'garagem/veiculos/form.html', {'form': form, 'titulo': 'Novo veículo'})
+    data = request.GET or None
+    form = VeiculoForm(data or None)
+
+    if request.method == 'POST':
+        form = VeiculoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_veiculos')
+
+    return render(request, 'garagem/veiculos/form.html', {
+        'form': form,
+        'titulo': 'Novo veículo'
+    })
 
 
 def editar_veiculo(request, pk):
