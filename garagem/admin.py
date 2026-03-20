@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Garagem, Veiculo
 
-# Register your models here.
+admin.site.register(Garagem)
+admin.site.register(Veiculo)
