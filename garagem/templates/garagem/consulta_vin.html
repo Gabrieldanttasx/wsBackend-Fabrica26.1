@@ -1,42 +1,81 @@
 {% extends 'garagem/base.html' %}
 
 {% block content %}
-<h2>Consultar veículo por VIN</h2>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Consultar veículo por VIN</h2>
+            <p class="text-muted mb-0">
+                Busque informações do veículo usando o número do chassi (VIN).
+            </p>
+        </div>
 
-<form method="post">
-    {% csrf_token %}
-    <p>
-        <label>VIN:</label><br>
-        <input type="text" name="vin">
-    </p>
+        <form method="post" class="mb-4">
+            {% csrf_token %}
 
-    <p>
-        <label>Ano do modelo (opcional):</label><br>
-        <input type="text" name="ano_modelo">
-    </p>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">VIN</label>
+                <input
+                    type="text"
+                    name="vin"
+                    class="form-control"
+                    placeholder="Digite o VIN do veículo"
+                    value="{{ request.POST.vin|default:'' }}"
+                >
+            </div>
 
-    <button type="submit">Consultar</button>
-</form>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Ano do modelo (opcional)</label>
+                <input
+                    type="text"
+                    name="ano_modelo"
+                    class="form-control"
+                    placeholder="Ex: 2020"
+                    value="{{ request.POST.ano_modelo|default:'' }}"
+                >
+            </div>
 
-{% if erro %}
-    <p>{{ erro }}</p>
-{% endif %}
+            <button type="submit" class="btn btn-dark px-4">
+                Consultar
+            </button>
+        </form>
 
-{% if resultado %}
-    <hr>
-    <h3>Resultado</h3>
-    <p><strong>Marca:</strong> {{ resultado.Make }}</p>
-    <p><strong>Modelo:</strong> {{ resultado.Model }}</p>
-    <p><strong>Ano:</strong> {{ resultado.ModelYear }}</p>
-    <p><strong>Fabricante:</strong> {{ resultado.Manufacturer }}</p>
-    <p><strong>Tipo de veículo:</strong> {{ resultado.VehicleType }}</p>
-    <p><strong>VIN consultado:</strong> {{ resultado.VIN }}</p>
+        {% if erro %}
+            <div class="alert alert-danger">
+                {{ erro }}
+            </div>
+        {% endif %}
 
-    <br>
+        {% if resultado %}
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body">
+                    <h4 class="fw-bold mb-3">Resultado da consulta</h4>
 
-    <a href="{% url 'criar_veiculo' %}?vin={{ resultado.VIN }}&marca={{ resultado.Make }}&modelo={{ resultado.Model }}&ano_modelo={{ resultado.ModelYear }}&fabricante={{ resultado.Manufacturer }}&tipo_veiculo={{ resultado.VehicleType }}">
-        🚗 Cadastrar este veículo
-    </a>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <p class="mb-2"><strong>Marca:</strong> {{ resultado.Make }}</p>
+                            <p class="mb-2"><strong>Modelo:</strong> {{ resultado.Model }}</p>
+                            <p class="mb-2"><strong>Ano:</strong> {{ resultado.ModelYear }}</p>
+                        </div>
 
-{% endif %}
+                        <div class="col-md-6">
+                            <p class="mb-2"><strong>Fabricante:</strong> {{ resultado.Manufacturer }}</p>
+                            <p class="mb-2"><strong>Tipo de veículo:</strong> {{ resultado.VehicleType }}</p>
+                            <p class="mb-2"><strong>VIN consultado:</strong> {{ resultado.VIN }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a
+                            class="btn btn-success"
+                            href="{% url 'criar_veiculo' %}?vin={{ resultado.VIN }}&marca={{ resultado.Make }}&modelo={{ resultado.Model }}&ano_modelo={{ resultado.ModelYear }}&fabricante={{ resultado.Manufacturer }}&tipo_veiculo={{ resultado.VehicleType }}"
+                        >
+                            🚗 Cadastrar este veículo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
