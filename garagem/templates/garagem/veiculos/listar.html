@@ -1,23 +1,25 @@
 {% extends 'garagem/base.html' %}
 
 {% block content %}
-<h2>Veículos</h2>
+<h2>🚗 Veículos</h2>
 
-<a href="{% url 'criar_veiculo' %}">Novo veículo</a>
+<a class="btn btn-primary mb-3" href="{% url 'criar_veiculo' %}">+ Novo veículo</a>
 
-<ul>
+<ul class="list-group">
     {% for veiculo in veiculos %}
-        <li>
-            <strong>{{ veiculo.marca }} {{ veiculo.modelo }}</strong> - VIN: {{ veiculo.vin }}
+        <li class="list-group-item">
+            <strong>{{ veiculo.marca }} {{ veiculo.modelo }}</strong> 
+            <br>
+            VIN: {{ veiculo.vin }}
             <br>
             Garagem: {{ veiculo.garagem.nome }}
-            <br>
-            <a href="{% url 'editar_veiculo' veiculo.id %}">Editar</a>
-            |
-            <a href="{% url 'excluir_veiculo' veiculo.id %}">Excluir</a>
+            <br><br>
+
+            <a class="btn btn-sm btn-warning" href="{% url 'editar_veiculo' veiculo.id %}">Editar</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'excluir_veiculo' veiculo.id %}">Excluir</a>
         </li>
     {% empty %}
-        <li>Nenhum veículo cadastrado.</li>
+        <li class="list-group-item">Nenhum veículo cadastrado.</li>
     {% endfor %}
 </ul>
 {% endblock %}
