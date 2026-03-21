@@ -55,11 +55,38 @@ O sistema possui uma interface moderna utilizando **Bootstrap**, proporcionando 
 
 ---
 
+## 🔗 Endpoints / Rotas da Aplicação
+
+A seguir estão as principais rotas disponíveis no sistema:
+
+### Home
+- `/` → página inicial do GarageVIN
+
+### Garagens
+- `/garagens/` → listagem de garagens
+- `/garagens/nova/` → cadastro de nova garagem
+- `/garagens/<id>/editar/` → edição de garagem
+- `/garagens/<id>/excluir/` → exclusão de garagem
+
+### Veículos
+- `/veiculos/` → listagem de veículos
+- `/veiculos/novo/` → cadastro de novo veículo
+- `/veiculos/<id>/editar/` → edição de veículo
+- `/veiculos/<id>/excluir/` → exclusão de veículo
+
+### Consulta por VIN
+- `/consultar-vin/` → consulta de informações de veículos via VIN
+
+---
+
 ## 🌐 API Utilizada
 
 A aplicação utiliza a API pública:
 
 👉 https://vpic.nhtsa.dot.gov/api/
+
+Exemplo de endpoint utilizado: https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{VIN}?format=json
+
 
 Responsável por fornecer dados de veículos com base no VIN.
 
@@ -90,22 +117,70 @@ garage_vin/
 ├── requirements.txt
 └── README.md
 ⚙️ Como Executar o Projeto
- Clonar o repositório
+1️⃣ Clonar o repositório
 git clone https://github.com/seu-usuario/garage-vin.git
 cd garage-vin
- Criar ambiente virtual
+2️⃣ Criar ambiente virtual
 python -m venv venv
 
 Ativar no Windows:
 
 venv\Scripts\activate
- Instalar dependências
+3️⃣ Instalar dependências
 pip install -r requirements.txt
-Aplicar migrações
+4️⃣ Aplicar migrações
 python manage.py migrate
- Criar superusuário (opcional)
+5️⃣ Criar superusuário (opcional)
 python manage.py createsuperuser
- Executar o servidor
+6️⃣ Executar o servidor
 python manage.py runserver
- Acessar o sistema
+7️⃣ Acessar o sistema
 http://127.0.0.1:8000/
+🧪 Dados para teste
+
+Após iniciar o sistema, cadastre uma garagem para começar a utilizar as funcionalidades.
+
+Para testar a consulta VIN, utilize um exemplo:
+
+1HGCM82633A004352
+🎨 Interface
+
+O sistema utiliza Bootstrap 5 para:
+
+Layout moderno
+
+Formulários estilizados
+
+Botões interativos
+
+Responsividade
+
+🧠 Diferenciais do Projeto
+
+Integração com API real de veículos
+
+Preenchimento automático de dados via VIN
+
+Estrutura organizada (padrão Django)
+
+Interface amigável e profissional
+
+Código limpo e bem estruturado
+
+📈 Possíveis Melhorias
+
+Sistema de autenticação (login/logout)
+
+Deploy em produção (Render)
+
+Dashboard com estatísticas
+
+Upload de imagens de veículos
+
+Filtros e busca avançada
+
+👨‍💻 Autor
+
+Desenvolvido por:
+
+Felipe Gabriel
