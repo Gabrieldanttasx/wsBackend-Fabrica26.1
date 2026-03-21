@@ -1,11 +1,50 @@
 {% extends 'garagem/base.html' %}
 
 {% block content %}
-<h2>{{ titulo }}</h2>
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">{{ titulo }}</h2>
+                <p class="text-muted mb-0">Preencha os dados da garagem abaixo.</p>
+            </div>
+            <a href="{% url 'listar_garagens' %}" class="btn btn-outline-secondary">
+                Voltar
+            </a>
+        </div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-</form>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label for="{{ form.nome.id_for_label }}" class="form-label fw-semibold">
+                            Nome da garagem
+                        </label>
+                        {{ form.nome }}
+                        <div class="form-text">Digite um nome claro para identificar sua garagem.</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.descricao.id_for_label }}" class="form-label fw-semibold">
+                            Descrição
+                        </label>
+                        {{ form.descricao }}
+                        <div class="form-text">Adicione uma breve descrição ou observação.</div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success px-4">
+                            Salvar
+                        </button>
+                        <a href="{% url 'listar_garagens' %}" class="btn btn-light border px-4">
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

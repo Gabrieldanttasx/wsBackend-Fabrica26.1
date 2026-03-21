@@ -7,10 +7,9 @@ class GaragemForm(forms.ModelForm):
         model = Garagem
         fields = ['nome', 'descricao']
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control'}),
-            'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: Garagem principal'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Descreva esta garagem'}),
         }
-
 
 class VeiculoForm(forms.ModelForm):
     class Meta:
